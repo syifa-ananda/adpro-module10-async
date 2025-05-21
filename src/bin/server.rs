@@ -51,8 +51,8 @@ async fn handle_connection(
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     let (tx, _) = channel(32);
-    let listener = TcpListener::bind(("127.0.0.1", 2000)).await?;
-    println!("Server listening on port 2000");
+    let listener = TcpListener::bind(("127.0.0.1", 8080)).await?;
+    println!("Server listening on port 8080");
 
     loop {
         let (stream, addr) = listener.accept().await?;
