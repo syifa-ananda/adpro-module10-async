@@ -13,8 +13,7 @@ async fn main() -> Result<(), tokio_websockets::Error> {
         .await?;
 
     let stdin = BufReader::new(tokio::io::stdin()).lines();
-
-    tokio::pin!(stdin); 
+    tokio::pin!(stdin);
 
     loop {
         select! {
@@ -23,7 +22,7 @@ async fn main() -> Result<(), tokio_websockets::Error> {
                     Ok(Some(input)) => {
                         ws.send(Message::text(input)).await?;
                     }
-                    _ => break, 
+                    _ => break,
                 }
             }
 
@@ -32,11 +31,12 @@ async fn main() -> Result<(), tokio_websockets::Error> {
                     Some(Ok(msg)) if msg.is_text() => {
                         println!("{}", msg.as_text().unwrap());
                     }
-                    Some(Ok(_)) => {} 
-                    _ => break,       
+                    Some(Ok(_)) => {}
+                    _ => break,
                 }
             }
         }
     }
+
     Ok(())
 }
